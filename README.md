@@ -65,3 +65,81 @@ if (target.nodeName.toLowerCase() == "em") {
 
 
 e.preventDefault();
+
+// setjum upp viðburðarhlustun (event listeners) sem kalla á itemDone() þegar smellt er á elementin
+let el = document.getElementById('shoppinglist');   // Náum í shoppinglist elementið
+el.addEventListener('click', function (e) {         // Bætum við viðburði á click
+    itemDone(e);                                    // Viðburðurinn kallar á fallið itemDone með e sem inntak
+}, false);
+
+
+
+
+
+
+//ef þið viljið gefa ákveðnu element fókus þegar vefsíðan er keyrð upp
+function setup(){                                       //búið til fallið setup
+    let textInput;                                      //skilgreinið breytuna
+    textInput = document.getElementById('username');    //náið í elementið username
+    textInput.focus();                                  // elementinu username gefið
+}
+window.addEventListener('load', setup, false);          // Þegar síðan er hlaðin upp
+
+
+
+
+
+
+
+//Kallar á ábendingu þegar verið er að skrifa en viðvörun ef farið er ú
+        function checkUsername() {                              // Búið til fallið
+            let username = el.value;                            // setjuð gildið inní breytunni el inní username
+            if (username.length < 5) {                          // Ef username < 5 stafir
+                elMsg.className = 'warning';                    // Breytið þá um class á elMsg yfir í warning
+                elMsg.textContent = 'Not long enough yet...';   // Uppfærið skilaboðin í elMsg
+            }else {                                             // annars
+                elMsg.textContent = '';                         // Tæmið skilaboðin
+            }
+        }
+
+        function tipUsername() {                                        // Búið til fallið
+            elMsg.className = 'tip';                                    // Breytið um nafn á class
+            elMsg.innerHTML = 'Username must be at least 5 characters'; // Uppfærið skilaboðin í elMsg
+        }
+
+        let el = document.getElementById('username');       // Náið í elementið username
+        let elMsg = document.getElementById('feedback');    // Náið í elementið feedback
+
+// hvort að elementið username fær fókus eða missir, kallið á viðeigandi breytur
+        el.addEventListener('focus', tipUsername, false);
+        el.addEventListener('blur', checkUsername, false);
+
+
+
+
+
+// Búið til HTML kóðann fyrir skilaboðin
+let msg = '<div class =\"header"\><a id=\"close\" href=\"#\">close X</a></div>';
+msg += '<div><h2>System Maintenance</h2>';
+msg += 'Our servers are being updated between 3 and 4 a.m. ';
+msg += 'During this time, there may be minor disruptions to service.</div>';
+
+let elNote = document.createElement('div');
+elNote.setAttribute('id', 'note');
+elNote.innerHTML = msg;
+document.body.appendChild(elNote);
+
+function dismissNote() {
+    document.body.removeChild(elNote);
+}
+
+let elClose = document.getElementById('close');
+elClose.addEventListener('clock', dismissNote, false);// þegar smellt er á elementið
+// close að þá er kallað á fallið dismissNote
+
+
+
+
+
+
+
