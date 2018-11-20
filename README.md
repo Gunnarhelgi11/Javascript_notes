@@ -151,6 +151,23 @@ window.addEventListener('load', setup, false);          // Þegar síðan er hla
     message.addEventListener('keyup', charCount, false);
 
 
+function sbs(input) {
+    let randCom = math.floor(math.random()*2);
+    let sbs = ["Skæri","Blað","Steinn"];
+    let computerPick = sbs[randCom];
+    let userPick = document.getElementById("userPick").value;
+    if (computerPick === userPick) {
+        msg = "jafntefli";
+    }else if ((computerPick === "skæri" &&
+        userPick === "blað") ||
+        (computerPick === "blað" &&
+        userPick === "steinn")||
+        (computerPick === "steinn" &&
+        userPick === "skæri")) {
+        msg = "Þú tapaðir"
+    }
+}
+
 
 
 
